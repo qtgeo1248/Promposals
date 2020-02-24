@@ -13,13 +13,19 @@
 
 <body>
     <h1> Welcome to the date picker </h1>
+    <p>{{error}}<br>{{error2}}</p>
     <form action = "/date">
-        <input id="datepicker" width="276" name = "dat">
+        <input width="276" name="ID">
+        <input id="datepicker" width="276" name="dat">
         <script>
             $('#datepicker').datepicker({
                 uiLibrary: 'bootstrap4'
             });
         </script>
+
+        <button>
+            Submit
+        </button>
     </form>
 </body>
 
