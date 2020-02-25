@@ -25,9 +25,18 @@ def addDate():
         db.remDates(list)
         return render_template("landing.html", error = "Unfortunately, your date is already chosen :(", img = image, error2 = "Please choose a different date.", happy = list)
 
-@app.route("/check")
+@app.route("/checking")
+def renderDate():
+    return render_template("checker.html")
+
+@app.route("/checked")
 def checkDate():
-    osis = str(request.args[""])
+    osis = int(request.args["ID"])
+    registered = db.check(osis)
+    if len(registered) == 0:
+        return render_template("checker.html", all = registered, error = "Unfortunately, you have not signed up for a prom date yet")
+    else:
+        return render_template("checker.html", all = registered, id = osis)
 
 if __name__ == "__main__":
     db.setup()

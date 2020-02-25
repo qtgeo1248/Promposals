@@ -51,13 +51,26 @@ def remDates(list):
     command = "SELECT date FROM dates;"
     out = exec(command)
     thingy = out.fetchall()
-    allChosen = []
-    for item in thingy:
-        if str(item) not in allChosen:
-            allChosen.append(str(item)[1:-2])
+    allChosen = convertTupToList(thingy)
     for item in allChosen:
         if (int(item) in list):
             list.remove(int(item))
+
+def convertTupToList(datesTuple):
+    list = []
+    for item in datesTuple:
+        if str(item) not in list:
+            list.append(str(item)[1:-2])
+    return list
+
+def check(osis):
+    command = "SELECT date FROM dates WHERE '" + str(osis) + "' = id;"
+    out = exec(command)
+    thingy = out.fetchall()
+    allDates = convertTupToList(thingy)
+    for i in range(len(allDates)):
+        allDates[i] = int(allDates[i])
+    return allDates
 
 def convertDbToStr(dbdate):
     days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"]

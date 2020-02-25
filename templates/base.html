@@ -8,9 +8,27 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-        <title>Promposals Calendar</title>
+        <title>{{title}}</title>
     </head>
     <body>
+        <script>
+            function convert(date) {
+                var days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+                var month = Math.floor(date / 1000);
+                var day = Math.floor(date / 10) % 100;
+                var time = date % 10;
+                var eyes = "";
+                eyes = eyes.concat(" ", month, "/", day, "/2020 ", days[(new Date(2020, month - 1, day)).getDay()]);
+                if (time == 0) {
+                    eyes = eyes.concat(" 4:00 PM");
+                } else {
+                    eyes = eyes.concat(" 4:30 PM");
+                }
+                return eyes
+            }
+        </script>
+
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="/">Promposals Calendar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,40 +45,3 @@
                 </ul>
             </div>
         </nav>
-
-        <h1 id="intro">Forgot Your Date?</h1>
-        <p>No need to fear,<br>CS is here!</p>
-
-        <p style="color:red">{{error}}</p>
-
-        <form action="/checked">
-            <input id="ID" width="276" name="ID" placeholder="Enter your OSIS"><br>
-            <button>Submit</button>
-        </form>
-
-        <p id="first"></p>
-        <ul id="dates">
-        </ul>
-
-        <script>
-            var dates = {{all}};
-            if (dates.length >= 1) {
-                var cur = dates[0];
-                var eyes = cur; //change later-->
-                document.getElementById("first").innerHTML = "You (OSIS {{id}}) registered for: ".concat(eyes);
-            }
-            if (dates.length > 1) {
-                var mess = document.createElement("p");
-                mess.innerHTML = "Also, you (or someone other than you) registered you up for all these other dates:"
-                document.getElementById("dates").appendChild(mess);
-                for (let i = 1; i < dates.length; i++) {
-                    var cur = dates[i];
-                    var eyes = cur; // change later-->
-                    var newLI = document.createElement("li");
-                    newLI.innerHTML = eyes;
-                    document.getElementById("dates").appendChild(newLI);
-                }
-            }
-        </script>
-    </body>
-</html>
