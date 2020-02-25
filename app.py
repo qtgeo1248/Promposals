@@ -11,7 +11,7 @@ app.secret_key = os.urandom(32)
 def index():
     db.genDates(list)
     db.remDates(list)
-    return render_template("landing.html", happy = list, img = image)
+    return render_template("landing.html", happy = list)
 
 @app.route("/date")
 def addDate():
@@ -19,11 +19,11 @@ def addDate():
     if db.authenticate(happy):
         command = "INSERT INTO dates (id, date) VALUES (" + request.args["ID"] + ", '" + request.args["dat"] + "');"
         db.exec(command)
-        return render_template("out.html", selectedDate = db.convertDbToStr(int(request.args["dat"])), img = image)
+        return render_template("out.html", selectedDate = db.convertDbToStr(int(request.args["dat"])))
     else:
         db.genDates(list)
         db.remDates(list)
-        return render_template("landing.html", error = "Unfortunately, your date is already chosen :(", img = image, error2 = "Please choose a different date.", happy = list)
+        return render_template("landing.html", error = "Unfortunately, your date is already chosen :(", error2 = "Please choose a different date.", happy = list)
 
 @app.route("/checking")
 def renderDate():
@@ -34,9 +34,13 @@ def checkDate():
     osis = int(request.args["ID"])
     registered = db.check(osis)
     if len(registered) == 0:
-        return render_template("checker.html", all = registered, error = "Unfortunately, you have not signed up for a prom date yet", img = image)
+        return render_template("checker.html", all = registered, error = "Unfortunately, you have not signed up for a prom date yet")
     else:
-        return render_template("checker.html", all = registered, id = osis, img = image)
+        return render_template("checker.html", all = registered, id = osis)
+
+@app.route("/faq")
+def renderFAQ():
+    return render_template("faq.html")
 
 if __name__ == "__main__":
     db.setup()
