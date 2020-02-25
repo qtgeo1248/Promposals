@@ -1,26 +1,33 @@
 import db, os, sqlite3
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 
-list = [3020, 3021]
+list = []
+image = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/revolving-hearts_1f49e.png"
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
 @app.route('/')
 def index():
-    return render_template("landing.html")
+    db.genDates(list)
+    db.remDates(list)
+    return render_template("landing.html", happy = list, img = image)
 
 @app.route("/date")
 def addDate():
-    #if happy == "":
-    #    return render_template("landing.html", error = "You have to pick a date ;)")
+    happy = str(request.args["dat"])
     if db.authenticate(happy):
         command = "INSERT INTO dates (id, date) VALUES (" + request.args["ID"] + ", '" + request.args["dat"] + "');"
         db.exec(command)
-        print(request.args["dat"])
-        return render_template("yourDate.html", selectedDate = request.args["dat"])
+        return render_template("out.html", selectedDate = db.convertDbToStr(int(request.args["dat"])), img = image)
     else:
-        return render_template("landing.html", error = "Unfortunately, your date is already chosen :(", error2 = "Please choose a different date.")
+        db.genDates(list)
+        db.remDates(list)
+        return render_template("landing.html", error = "Unfortunately, your date is already chosen :(", img = image, error2 = "Please choose a different date.", happy = list)
+
+@app.route("/check")
+def checkDate():
+    osis = str(request.args[""])
 
 if __name__ == "__main__":
     db.setup()
