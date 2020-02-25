@@ -34,9 +34,9 @@ def checkDate():
     osis = int(request.args["ID"])
     registered = db.check(osis)
     if len(registered) == 0:
-        return render_template("checker.html", all = registered, error = "Unfortunately, you have not signed up for a prom date yet")
+        return render_template("checker.html", all = registered, error = "Unfortunately, you have not signed up for a prom date yet", img = image)
     else:
-        return render_template("checker.html", all = registered, id = osis)
+        return render_template("checker.html", all = registered, id = osis, img = image)
 
 if __name__ == "__main__":
     db.setup()
