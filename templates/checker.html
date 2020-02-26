@@ -1,40 +1,41 @@
 {% extends "base.html" %}
-        <h1 id="intro">Forgot Your Date?</h1>
-        <p>No need to fear,<br>CS is here!</p>
+{% block title}Promposals Date Finder{% endblock %}
+{% block body %}
+<h1 id="intro">Forgot Your Date?</h1>
+<p>No need to fear,<br>CS is here!</p>
 
-        <p style="color:red">{{error}}</p>
+<p style="color:red">{{error}}</p>
 
-        <form action="/checked">
-            <input id="ID" width="276" name="ID" placeholder="Enter your OSIS"><br>
-            <button>Submit</button>
-        </form>
+<form action="/checked">
+    <input id="ID" width="276" name="ID" placeholder="Enter your OSIS"><br>
+    <button>Submit</button>
+</form>
 
-        <p id="first"></p>
-        <ul id="dates" class="list-group">
-        </ul>
+<p id="first"></p>
+<ul id="dates" class="list-group">
+</ul>
 
-        <script>
-            var dates = {{all}};
-            if (dates.length >= 1) {
-                var cur = dates[0];
-                var eyes = cur; //change later-->
-                document.getElementById("first").innerHTML = "You (OSIS {{id}}) registered for: ".concat(eyes);
-            }
-            if (dates.length > 1) {
-                var mess = document.createElement("li");
-                mess.setAttribute("class", "list-group-item");
-                mess.setAttribute("style", "background-color:pink");
-                mess.innerHTML = "Also, you (or someone other than you) registered you up for all these other dates:"
-                document.getElementById("dates").appendChild(mess);
-                for (let i = 1; i < dates.length; i++) {
-                    var cur = dates[i];
-                    var eyes = cur; // change later-->
-                    var newLI = document.createElement("li");
-                    newLI.setAttribute("class", "list-group-item")
-                    newLI.innerHTML = eyes;
-                    document.getElementById("dates").appendChild(newLI);
-                }
-            }
-        </script>
-    </body>
-</html>
+<script>
+    var dates = {{all}};
+    if (dates.length >= 1) {
+        var cur = dates[0];
+        var eyes = cur; //change later-->
+        document.getElementById("first").innerHTML = "You (OSIS {{id}}) registered for: ".concat(eyes);
+    }
+    if (dates.length > 1) {
+        var mess = document.createElement("li");
+        mess.setAttribute("class", "list-group-item");
+        mess.setAttribute("style", "background-color:pink");
+        mess.innerHTML = "Also, you (or someone other than you) registered you up for all these other dates:"
+        document.getElementById("dates").appendChild(mess);
+        for (let i = 1; i < dates.length; i++) {
+            var cur = dates[i];
+            var eyes = cur; // change later-->
+            var newLI = document.createElement("li");
+            newLI.setAttribute("class", "list-group-item")
+            newLI.innerHTML = eyes;
+            document.getElementById("dates").appendChild(newLI);
+        }
+    }
+</script>
+{% endblock %}
