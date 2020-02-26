@@ -93,9 +93,13 @@ def convertDbToStr(dbdate):
     return eyes
 
 def wrongEmail(email):
+    cur = ""
+    num = 0
+    for i in email:
+        if i.isdigit():
+            cur += i
     try:
-        test = email[-2:]
-        num = int(test)
+        num = int(cur)
     except ValueError:
         return False
     if num // 10 >= 1:
