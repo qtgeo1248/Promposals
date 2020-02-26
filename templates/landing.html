@@ -1,20 +1,33 @@
 {% extends "base.html" %}
 {% block title %}Promposals Calendar{% endblock %}
 {% block body %}
-<h1 id="intro">Welcome to the date picker</h1>
-
-<div class="m-3 d-flex align-items-center justify-content-center">
-    <div class = "card">
+<div class="m-4 d-flex align-items-center justify-content-left">
+    <div class="card" style="border-width:2px;">
         <div class = "card-body">
+            <h1 id="intro" style="padding:25px;">Welcome to the date picker
+                <img src="static/couple.png" width="50px" height="50px">
+            </h1>
             <p style="color:red">{{error}}</p>
             <p style="color:red">{{error2}}</p>
             <form action="/date">
-                <input id="ID" width="276" name="ID" placeholder="Enter your OSIS"><br>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Stuy Email:</label>
+                    <div class="col-ml-sm-5 mr-1">
+                        <input id="ID" class="form-control" width="176" name="ID" placeholder="Email">
+                    </div>
+                    <label class="col-mb-0 col-form-label">@stuy.edu</label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Your OSIS:</label>
+                    <div>
+                        <input id="ID" class="form-control" width="276" name="ID" placeholder="OSIS">
+                    </div>
+                </div>
                 <p>Select a date for your Promposal:
                     <select id="dates" name="dat">
                     </select>
                 </p>
-                <button>Submit</button>
+                <button class="btn btn-outline-success">Submit</button>
             </form>
         </div>
     </div>
