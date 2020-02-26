@@ -11,16 +11,18 @@ def index():
     list = db.genDates()
     print(list)
     list = db.remDates(list)
-    print(list)
     return render_template("landing.html", happy = list, error = "", error2 = "")
 
 @app.route("/date")
 def addDate():
     some = str(request.args["dat"])
     id = str(request.args["ID"])
-    try:
-        num = int(id)
-    except ValueError:
+    email = str(request.args["email"])
+    if db.wrongEmail(email):
+        list = db.genDates()
+        list = db.remDates(list)
+        return render_template("landing.html", error = "You must input a valid, senior, email address", happy = list)
+    if db.wrongOSIS(id):
         list = db.genDates()
         list = db.remDates(list)
         return render_template("landing.html", error = "Your OSIS must be a 9-digit number!", happy = list)
