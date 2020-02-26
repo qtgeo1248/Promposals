@@ -25,7 +25,7 @@ def addDate():
     if db.wrongOSIS(id):
         list = db.genDates()
         list = db.remDates(list)
-        return render_template("landing.html", error = "Your OSIS must be a 9-digit number!", happy = list)
+        return render_template("landing.html", error = "Your OSIS must be", happy = list, italics = " your", notitalics = " valid 9-digit number!")
     if (len(some) == 0) or (len(str(request.args["ID"])) == 0) or (len(str(request.args["email"])) == 0):
         list = db.genDates()
         list = db.remDates(list)

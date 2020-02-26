@@ -101,7 +101,16 @@ def wrongEmail(email):
     try:
         num = int(cur)
     except ValueError:
-        return False
+        return True
     if num // 10 >= 1:
-        return False
-    return True
+        return True
+    return False
+
+def wrongOSIS(osis):
+    try:
+        num = int(osis)
+    except ValueError:
+        return True
+    if (num // (10 ** 9) >= 1) or (num % (10 ** 9) < 10 ** 8):
+        return True
+    return False
