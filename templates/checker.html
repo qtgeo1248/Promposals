@@ -1,19 +1,30 @@
 {% extends "base.html" %}
 {% block title %}Promposals Date Finder{% endblock %}
 {% block body %}
-<h1 id="intro">Forgot Your Date?</h1>
-<p>No need to fear,<br>CS is here!</p>
+<div class="m-4 d-flex align-items-center justify-content-left">
+    <div class="card" style="border-width:2px;">
+        <div class = "card-body">
+            <h1 id="intro">Forgot Your Date?
+                <img src="static/no.png" width="50px" height="50px">
+                <img src="static/brain.png" width="50px" height="50px">
+            </h1>
+            <p>No need to fear,<br>CS is here!</p>
+            <p style="color:red">{{error}}<b style="color:black">{{bold}}</b>{{notbold}}</p>
+            <form action="/checked">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Your OSIS:</label>
+                    <div>
+                        <input id="ID" class="form-control" width="276" name="ID" placeholder="OSIS">
+                    </div>
+                </div>
+            </form>
 
-<p style="color:red">{{error}}</p>
-
-<form action="/checked">
-    <input id="ID" width="276" name="ID" placeholder="Enter your OSIS"><br>
-    <button>Submit</button>
-</form>
-
-<p id="first"></p>
-<ul id="dates" class="list-group">
-</ul>
+            <p id="first"></p>
+            <ul id="dates" class="list-group">
+            </ul>
+        </div>
+    </div>
+</div>
 
 <script>
     var dates = {{all}};

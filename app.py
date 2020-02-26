@@ -48,7 +48,7 @@ def checkDate():
     osis = int(request.args["ID"])
     registered = db.check(osis)
     if len(registered) == 0:
-        return render_template("checker.html", all = registered, error = "Unfortunately, you (OSIS " + str(osis) + ") have not signed up for a prom date yet")
+        return render_template("checker.html", all = registered, error = "Unfortunately, you", bold = " (OSIS: " + str(osis) + ") ", notbold = "have not signed up for a prom date yet")
     else:
         return render_template("checker.html", all = registered, id = osis)
 
