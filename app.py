@@ -11,7 +11,7 @@ app.secret_key = os.urandom(32)
 def index():
     db.genDates(list)
     db.remDates(list)
-    return render_template("landing.html", happy = list)
+    return render_template("landing.html", happy = list, error = "", error2 = "")
 
 @app.route("/date")
 def addDate():
