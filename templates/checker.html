@@ -18,8 +18,7 @@
 <script>
     var dates = {{all}};
     if (dates.length >= 1) {
-        var cur = dates[0];
-        var eyes = cur; //change later-->
+        var eyes = convert(dates[0]); //change later-->
         document.getElementById("first").innerHTML = "You (OSIS {{id}}) registered for: ".concat(eyes);
     }
     if (dates.length > 1) {
@@ -29,8 +28,7 @@
         mess.innerHTML = "Also, you (or someone other than you) registered you up for all these other dates:"
         document.getElementById("dates").appendChild(mess);
         for (let i = 1; i < dates.length; i++) {
-            var cur = dates[i];
-            var eyes = cur; // change later-->
+            var eyes = convert(dates[i]); // change later-->
             var newLI = document.createElement("li");
             newLI.setAttribute("class", "list-group-item")
             newLI.innerHTML = eyes;

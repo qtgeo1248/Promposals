@@ -23,19 +23,8 @@
 <script>
     var dates = {{happy}};
     for (let i = 0; i < dates.length; i++) {
-        var days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
         var cur = dates[i];
-        var month = Math.floor(cur / 1000);
-        var day = Math.floor(cur / 10) % 100;
-        var time = cur % 10;
-        var eyes = "";
-        eyes = eyes.concat(" ", month, "/", day, "/2020 ", days[(new Date(2020, month - 1, day)).getDay()]);
-        if (time == 0) {
-            eyes = eyes.concat(" 4:00 PM");
-        } else {
-            eyes = eyes.concat(" 4:30 PM");
-        }
-
+        var eyes = convert(cur);
         var newForm = document.createElement("option");
         newForm.setAttribute("id", cur);
         newForm.setAttribute("value", cur);
