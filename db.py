@@ -24,7 +24,8 @@ def authenticate(date):
         return True
     return False
 
-def genDates(list):
+def genDates():
+    list = []
     month = 3
     day = 2
     for i in range(15):
@@ -33,6 +34,12 @@ def genDates(list):
                 cur = ""
                 cur += str(month)
                 d = day + j
+                if (d >= 31) and (month % 2 == 1):
+                    d -= 31
+                    month += 1
+                if (d >= 30) and (month % 2 == 0):
+                    d -= 30
+                    month += 1
                 if (d // 10 == 0):
                     cur += "0"
                 cur += str(d)
@@ -46,6 +53,8 @@ def genDates(list):
         if (day >= 30) and (month % 2 == 0):
             day -= 30
             month += 1
+    return list
+
 
 def remDates(list):
     command = "SELECT date FROM dates;"
@@ -55,6 +64,7 @@ def remDates(list):
     for item in allChosen:
         if (int(item) in list):
             list.remove(int(item))
+    return list
 
 def convertTupToList(datesTuple):
     list = []
@@ -85,3 +95,13 @@ def convertDbToStr(dbdate):
     else:
         eyes += " 4:30 PM"
     return eyes
+
+def wrongEmail(email):
+    try:
+        test = email[-2:]
+        num = int(test)
+    except ValueError:
+        return False
+    if num // 10 >= 1:
+        return False
+    return True
