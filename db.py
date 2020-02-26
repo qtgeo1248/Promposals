@@ -27,32 +27,28 @@ def authenticate(date):
 def genDates():
     list = []
     month = 3
-    day = 2
+    day = 1
     for i in range(15):
         for j in range(5):
+            day += 1
             for k in range(2):
                 cur = ""
                 cur += str(month)
-                d = day + j
-                if (d >= 31) and (month % 2 == 1):
-                    d -= 31
-                    month += 1
-                if (d >= 30) and (month % 2 == 0):
-                    d -= 30
-                    month += 1
-                if (d // 10 == 0):
+                if month % 2 == 1:
+                    if day >= 31:
+                        day -= 30
+                        month += 1
+                if month % 2 == 0:
+                    if day >= 30:
+                        day -= 29
+                        month += 1
+                if (day // 10 == 0):
                     cur += "0"
-                cur += str(d)
+                cur += str(day)
                 cur += str(k)
                 if int(cur) not in noschool:
                     list.append(int(cur))
-        day += 7
-        if (day >= 31) and (month % 2 == 1):
-            day -= 31
-            month += 1
-        if (day >= 30) and (month % 2 == 0):
-            day -= 30
-            month += 1
+        day += 2
     return list
 
 
