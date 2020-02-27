@@ -4,11 +4,11 @@
 <div class="m-4 d-flex align-items-center justify-content-left">
     <div class="card" style="border-width:2px;">
         <div class = "card-body">
-            <h1 id="intro">Forgot Your Date?
-                <img src="static/no.png" width="50px" height="50px">
-                <img src="static/brain.png" width="50px" height="50px">
+            <h1 id="intro" class="mb-0 pb-0">Forgot Your Date?
+                <img src="static/no.png" width="40px" height="40px">
+                <img src="static/brain.png" width="40px" height="40px">
             </h1>
-            <p>No need to fear,<br>CS is here!</p>
+            <small class="form-text text-muted text-center mt-0 pt-0">No need to fear, CS is here!</small>
             <p style="color:red">{{error}}<b style="color:black">{{bold}}</b>{{notbold}}</p>
             <form action="/checked">
                 <div class="form-group row">
@@ -22,6 +22,8 @@
             <p id="first"></p>
             <ul id="dates" class="list-group">
             </ul>
+
+            <button class="btn btn-outline-danger">Submit</button>
         </div>
     </div>
 </div>

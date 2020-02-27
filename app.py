@@ -18,25 +18,19 @@ def addDate():
     some = str(request.args["dat"])
     id = str(request.args["ID"])
     email = str(request.args["email"])
+    list = db.genDates()
+    list = db.remDates(list)
     if db.wrongEmail(email):
-        list = db.genDates()
-        list = db.remDates(list)
         return render_template("landing.html", error = "You must input a valid, senior, email address", happy = list)
     if db.wrongOSIS(id):
-        list = db.genDates()
-        list = db.remDates(list)
         return render_template("landing.html", error = "Your OSIS must be", happy = list, italics = " your", notitalics = " valid 9-digit number!")
     if (len(some) == 0) or (len(str(request.args["ID"])) == 0) or (len(str(request.args["email"])) == 0):
-        list = db.genDates()
-        list = db.remDates(list)
         return render_template("landing.html", error = "All fields must be filled!", happy = list)
     if db.authenticate(some):
         command = "INSERT INTO dates (id, date) VALUES (" + request.args["ID"] + ", '" + request.args["dat"] + "');"
         db.exec(command)
         return render_template("out.html", selectedDate = db.convertDbToStr(int(request.args["dat"])))
     else:
-        list = db.genDates()
-        list = db.remDates(list)
         return render_template("landing.html", error = "Unfortunately, your date is already chosen :(", error2 = "Please choose a different date.", happy = list)
 
 @app.route("/checking")
