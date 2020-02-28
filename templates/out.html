@@ -5,10 +5,17 @@
 <div class="m-4 d-flex align-items-center justify-content-left">
     <div class="card" style="border-width:2px;">
         <div class = "card-body">
-            <h1 id="intro" class="mb-1 pb-0">Confirmation!
+            <h1 id="intro" class="mb-0 pb-0 text-center">Confirmation!
                 <img src="static/check.png" width="40px" height="40px">
             </h1>
+            <br>
             You selected: <b>{{selectedDate}}</b> with OSIS: <b>{{osis}}</b>.
+            <br>
+            <br>
+            <form action="/redo">
+                If that wasn't what you wanted, click here: &nbsp&nbsp
+                <button class="btn btn-outline-danger">Undo</button>
+            </form>
         </div>
     </div>
 </div>
