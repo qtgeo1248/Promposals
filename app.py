@@ -9,7 +9,6 @@ app.secret_key = os.urandom(32)
 @app.route('/')
 def index():
     list = db.genDates()
-    print(list)
     list = db.remDates(list)
     return render_template("landing.html", happy = list, error = "", error2 = "")
 
@@ -29,13 +28,17 @@ def addDate():
     if db.authenticate(some):
         command = "INSERT INTO dates (id, date) VALUES (" + request.args["ID"] + ", '" + request.args["dat"] + "');"
         db.exec(command)
-        return render_template("out.html", selectedDate = db.convertDbToStr(int(request.args["dat"])), osis = id)
+        return render_template("out.html", selectedDate = str(request.args["dat"]), osis = id)
     else:
         return render_template("landing.html", error = "Unfortunately, your date is already chosen :(", error2 = "Please choose a different date.", happy = list)
 
-@app.rout("redo")
+@app.route("/redo")
 def redo():
-    in = str(request.args["input"])
+    date = str(request.args["input"])
+    command = "DELETE FROM dates WHERE date = " + str(date) + ";"
+    db.exec(command)
+    list = db.genDates()
+    list = db.remDates(list)
     return render_template("landing.html", happy = list, error = "", error2 = "")
 
 @app.route("/checking")
