@@ -29,7 +29,7 @@ def addDate():
     if db.authenticate(some):
         command = "INSERT INTO dates (id, date) VALUES (" + request.args["ID"] + ", '" + request.args["dat"] + "');"
         db.exec(command)
-        return render_template("out.html", selectedDate = db.convertDbToStr(int(request.args["dat"])))
+        return render_template("out.html", selectedDate = db.convertDbToStr(int(request.args["dat"])), osis = id)
     else:
         return render_template("landing.html", error = "Unfortunately, your date is already chosen :(", error2 = "Please choose a different date.", happy = list)
 
