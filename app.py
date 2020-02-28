@@ -33,6 +33,11 @@ def addDate():
     else:
         return render_template("landing.html", error = "Unfortunately, your date is already chosen :(", error2 = "Please choose a different date.", happy = list)
 
+@app.rout("redo")
+def redo():
+    in = str(request.args["input"])
+    return render_template("landing.html", happy = list, error = "", error2 = "")
+
 @app.route("/checking")
 def renderDate():
     return render_template("checker.html")
