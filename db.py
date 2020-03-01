@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, session, redirect, url_for, f
 DB_FILE = "dates.db"
 noschool = [3190, 3191, 3200, 3201, 5210, 5211, 5250, 5251, 6040, 6041,
             4090, 4091, 4100, 4101, 4130, 4131, 4140, 4141, 4150, 4151, 4160, 4161, 4170, 4171]
+notit = [216081133, 215808627, 216191908, 214351439, 209198332, 242675569]
 
 def setup():
     command = "CREATE TABLE IF NOT EXISTS dates (id INT, date INT);"
