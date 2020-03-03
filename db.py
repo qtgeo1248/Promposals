@@ -28,21 +28,21 @@ def authenticate(date):
 def genDates():
     list = []
     month = 3
-    day = int(str(datetime.date(datetime.now()))[5:7]) - 2
-    for i in range(15):
+    day = 8
+    for i in range(14):
         for j in range(5):
             day += 1
+            if month % 2 == 1:
+                if day > 31:
+                    day -= 31
+                    month += 1
+            if month % 2 == 0:
+                if day > 30:
+                    day -= 30
+                    month += 1
             for k in range(2):
                 cur = ""
                 cur += str(month)
-                if month % 2 == 1:
-                    if day >= 31:
-                        day -= 30
-                        month += 1
-                if month % 2 == 0:
-                    if day >= 30:
-                        day -= 29
-                        month += 1
                 if (day // 10 == 0):
                     cur += "0"
                 cur += str(day)
@@ -101,6 +101,10 @@ def wrongEmail(email):
             cur += i
     try:
         num = int(cur)
+    except ValueError:
+        return True
+    try:
+        num = int(email[-2:])
     except ValueError:
         return True
     if num // 10 >= 1:
