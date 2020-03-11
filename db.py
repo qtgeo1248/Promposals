@@ -28,8 +28,8 @@ def authenticate(date):
 def genDates():
     list = []
     month = 3
-    day = 8
-    for i in range(14):
+    day = 15
+    for i in range(13):
         for j in range(5):
             day += 1
             if month % 2 == 1:
